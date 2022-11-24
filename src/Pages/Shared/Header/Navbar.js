@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Authcontext } from '../../../Contexts/AuthProvider';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(Authcontext);
+    const handleLogout = () => {
+        logOut()
+            .then(() => { })
+            .catch(() => { })
+    }
     return (
         <div>
             <div className="navbar text-white bg-primary">
@@ -41,7 +48,7 @@ const Navbar = () => {
                                 Category
                                 <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
                             </a>
-                            <ul className="p-2">
+                            <ul className="p-2 bg-primary">
                                 <li><a>Brass</a></li>
                                 <li><a>String</a></li>
                                 <li><a>Keyboard</a></li>
@@ -49,12 +56,21 @@ const Navbar = () => {
                                 <li><a>Percussion</a></li>
                             </ul>
                         </li>
+
+                        <li><Link to={'/dashboard'}>Dashboard</Link></li>
                         <li><a>Blog</a></li>
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to={'/login'}> <button className="btn btn-accent mx-4 px-8 text-white">Login</button></Link>
-                    <Link to={'/register'}> <button className="btn btn-accent text-white">Register</button></Link>
+                    {
+                        user?.uid ?
+                            <button onClick={handleLogout} className="btn btn-accent mx-4 px-8 text-white">Logout</button>
+                            :
+                            <>
+                                <Link to={'/login'}> <button className="btn btn-accent mx-4 px-8 text-white">Login</button></Link>
+                                <Link to={'/register'}> <button className="btn btn-accent text-white">Register</button></Link>
+                            </>
+                    }
                 </div>
             </div>
         </div>
