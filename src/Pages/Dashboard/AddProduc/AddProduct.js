@@ -179,7 +179,7 @@ const AddProduct = () => {
                                     <span className="label-text mr-2">Excellent</span>
                                     <input
                                         type="radio"
-                                        value="excellent"
+                                        value="Excellent"
                                         {...register("radiob")}
                                         className="radio checked:bg-primary"
 
@@ -191,7 +191,7 @@ const AddProduct = () => {
                                     <span className="label-text mr-2">Good</span>
                                     <input
                                         type="radio"
-                                        value="good"
+                                        value="Good"
                                         {...register("radiob")}
                                         className="radio checked:bg-primary" />
                                 </label>
@@ -201,7 +201,7 @@ const AddProduct = () => {
                                     <span className="label-text mr-2">Fair</span>
                                     <input
                                         type="radio"
-                                        value="fair"
+                                        value="Fair"
                                         {...register("radiob")}
                                         className="radio checked:bg-primary"
 
