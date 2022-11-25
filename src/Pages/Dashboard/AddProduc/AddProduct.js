@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Authcontext } from '../../../Contexts/AuthProvider';
 
 const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { user } = useContext(Authcontext);
     const [registerError, setRegisterError] = useState('');
     const imageHostKey = process.env.REACT_APP_imgbb_key;
     const navigate = useNavigate();
@@ -12,46 +14,55 @@ const AddProduct = () => {
         setRegisterError('');
         const image = data.image[0];
         console.log(data);
-        // const formData = new FormData();
-        // formData.append('image', image);
-        // const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
-        // fetch(url, {
-        //     method: 'POST',
-        //     body: formData
-        // })
-        //     .then(res => res.json())
-        //     .then(imgData => {
-        //         if (imgData.success) {
+        const formData = new FormData();
+        formData.append('image', image);
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                if (imgData.success) {
 
-        //             const user = {
-        //                 name: data.name,
-        //                 email: data.email,
-        //                 image: imgData.data.url,
-        //                 role: data.radiob
-        //             }
-        //             // save Product to DB
-        //             fetch('http://localhost:5000/users', {
-        //                 method: 'POST',
-        //                 headers: {
-        //                     'content-type': 'application/json'
-        //                 },
-        //                 body: JSON.stringify(user)
-        //             })
-        //                 .then(res => res.json())
-        //                 .then(result => {
-        //                     console.log(result);
-        //                     toast.success('Product is added')
-        //                     navigate('/dashboard')
+                    const product = {
+                        sellerName: user.displayName,
+                        SellerEmail: user.email,
+                        name: data.name,
+                        price: data.price,
+                        originalPrice: data.originalPrice,
+                        category: data.category,
+                        condition: data.radiob,
+                        number: data.number,
+                        location: data.location,
+                        description: data.description,
+                        year: data.year,
+                        image: imgData.data.url,
+                        time: Date()
+                    }
+                    // save Product to DB
+                    fetch('http://localhost:5000/products', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(product)
+                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            console.log(result);
+                            toast.success('Product added Successfully')
+                            navigate('/dashboard')
 
-        //                 })
-        //                 .catch(e => {
-        //                     setRegisterError(e.message)
-        //                 });
-        //         }
-        //     })
-        //     .catch(e => {
-        //         setRegisterError(e.message);
-        //     });
+                        })
+                        .catch(e => {
+                            setRegisterError(e.message)
+                        });
+                }
+            })
+            .catch(e => {
+                setRegisterError(e.message);
+            });
     }
     return (
         <div className="flex flex-col my-10 items-center" >
@@ -72,16 +83,23 @@ const AddProduct = () => {
                         </div>
 
                         <div className='flex justify-between'>
-                            <div className="form-control w-1/2 mr-2">
+                            <div className="form-control w-1/3 mr-2">
                                 <label className="label">
-                                    <span className="label-text">Price</span>
+                                    <span className="label-text">Resale Price</span>
                                 </label>
-                                <input type="number" placeholder="Price" {...register("price", {
-                                    required: "Price is Required"
+                                <input type="number" placeholder=" Resale Price" {...register("price", {
+                                    required: "Resale Price is Required"
                                 })} className="input input-bordered" />
                                 {errors.price && <p className='text-red-500'>{errors.price.message}</p>}
                             </div>
-                            <div className="form-control w-1/2 ml-2">
+                            <div className="form-control w-1/3 mx-2">
+                                <label className="label">
+                                    <span className="label-text">Original Price</span>
+                                </label>
+                                <input type="number" placeholder="Original Price" {...register("originalPrice")} className="input input-bordered" />
+                                {errors.price && <p className='text-red-500'>{errors.price.message}</p>}
+                            </div>
+                            <div className="form-control w-1/3 ml-2">
                                 <label className="label">
                                     <span className="label-text">Purchase Year</span>
                                 </label>
@@ -192,7 +210,7 @@ const AddProduct = () => {
                             </div>
                         </div>
                         <div className="form-control">
-                            <button type='submit' className="btn btn-accent text-white">Register</button>
+                            <button type='submit' className="btn btn-accent text-white">Add Product</button>
                             {registerError && <p className='text-red-500'>{registerError}</p>}
                         </div>
                     </div>
