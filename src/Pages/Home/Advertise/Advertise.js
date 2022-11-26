@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import Loading from '../../Shared/Loading/Loading';
 import Product from '../Category/Product';
 
 const Advertise = () => {
-    const { data: products = [], refetch } = useQuery({
+    const { data: products = [], isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/products?status=advertise');
@@ -11,6 +12,10 @@ const Advertise = () => {
             return data;
         }
     });
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     return (
         <div className='grid grid-cols-3 mt-8 mx-8'>
             {

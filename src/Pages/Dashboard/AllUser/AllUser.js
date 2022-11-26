@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import Loading from '../../Shared/Loading/Loading';
 
 const AllUser = () => {
-    const { data: users = [], } = useQuery({
+    const { data: users = [], isLoading } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/users');
@@ -10,7 +11,9 @@ const AllUser = () => {
             return data;
         }
     });
-
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
     return (
         <div className='mx-2 my-4'>

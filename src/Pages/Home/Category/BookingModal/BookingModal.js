@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { Authcontext } from '../../../../Contexts/AuthProvider';
 
 const BookingModal = ({ product }) => {
@@ -8,6 +9,7 @@ const BookingModal = ({ product }) => {
     const [bookingError, setBookingError] = useState('');
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { name, price, image } = product;
+    const navigate = useNavigate();
     const handleBooking = data => {
         setBookingError('');
         const booking = {
@@ -31,6 +33,7 @@ const BookingModal = ({ product }) => {
             .then(result => {
                 console.log(result);
                 toast.success('The Item is Successfully Booked')
+                navigate('/dashboard/bookings')
             })
             .catch(error => setBookingError(error.message))
 

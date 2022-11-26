@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
+import Loading from '../../Shared/Loading/Loading';
 
 const Bookings = () => {
-    const { data: bookings = [], refetch } = useQuery({
+
+    const { data: bookings = [], refetch, isLoading } = useQuery({
         queryKey: ['bookings'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/bookings');
@@ -25,6 +27,9 @@ const Bookings = () => {
                     toast.success('Booking Delete Successfully')
                 }
             })
+    }
+    if (isLoading) {
+        return <Loading></Loading>
     }
 
     return (
@@ -73,6 +78,7 @@ const Bookings = () => {
                     </tbody>
                 </table>
             </div>
+
         </div>
     );
 };

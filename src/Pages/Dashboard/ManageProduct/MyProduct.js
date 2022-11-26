@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
+import Loading from '../../Shared/Loading/Loading';
 
 const MyProduct = () => {
-    const { data: products = [], refetch } = useQuery({
+    const { data: products = [], refetch, isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/products');
@@ -31,7 +32,9 @@ const MyProduct = () => {
                 }
             })
     }
-
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     return (
         <div className='mx-2 my-4'>
             <h2 className="text-3xl mb-2 ml-2">My Products</h2>
