@@ -13,6 +13,9 @@ import ProductDetails from '../../Pages/Home/Category/ProductDetails';
 import Home from '../../Pages/Home/Home/Home';
 import Login from '../../Pages/Login/Login';
 import Register from '../../Pages/Register/Register';
+import AdminRoute from '../AdminRoute/AdminRoute';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import SellerRoute from '../SellerRoute/SellerRoute';
 
 const routes = createBrowserRouter([
     {
@@ -33,7 +36,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/category/:name',
-                element: <Category></Category>,
+                element: <PrivateRoute><Category></Category></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/category/${params.name}`)
             },
             {
@@ -45,27 +48,27 @@ const routes = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             {
                 path: '/dashboard',
-                element: <MyProduct></MyProduct>
+                element: <SellerRoute><MyProduct></MyProduct></SellerRoute>
             },
             {
                 path: '/dashboard/allusers',
-                element: <AllUser></AllUser>
+                element: <AdminRoute><AllUser></AllUser></AdminRoute>
             },
             {
                 path: '/dashboard/allseller',
-                element: <AllSeller></AllSeller>
+                element: <AdminRoute><AllSeller></AllSeller></AdminRoute>
             },
             {
                 path: '/dashboard/allbuyer',
-                element: <AllBuyer></AllBuyer>
+                element: <AdminRoute><AllBuyer></AllBuyer></AdminRoute>
             },
             {
                 path: '/dashboard/addproduct',
-                element: <AddProduct></AddProduct>
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
             },
             {
                 path: '/dashboard/bookings',
