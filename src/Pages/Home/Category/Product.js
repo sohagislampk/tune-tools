@@ -2,6 +2,7 @@ import React from 'react';
 import { BsFillPersonFill } from 'react-icons/bs'
 import { ImLocation2 } from 'react-icons/im'
 import { Link } from 'react-router-dom';
+import BookingModal from './BookingModal/BookingModal';
 const Product = ({ product }) => {
     const { _id, image, name, description, time, year, price, condition, location, originalPrice, sellerName } = product;
     const postYear = new Date(time).getFullYear();
@@ -54,10 +55,10 @@ const Product = ({ product }) => {
 
                 <span className='text-xs text-secondary'>Published Time : {date}</span>
                 <div className="card-actions justify-center">
-
-                    <button className="btn btn-accent text-white">Book Now</button>
+                    <label htmlFor="booking-modal" className="btn btn-accent text-white">Book Now</label>
                 </div>
             </div>
+            <BookingModal product={product}></BookingModal>
         </div>
 
     );
