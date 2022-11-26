@@ -24,43 +24,46 @@ const Register = () => {
             .then(imgData => {
                 if (imgData.success) {
 
-                    const user = {
+                    const userData = {
                         name: data.name,
                         email: data.email,
                         image: imgData.data.url,
                         role: data.radiob
                     }
-                    // save user to DB
-                    fetch('http://localhost:5000/users', {
-                        method: 'POST',
-                        headers: {
-                            'content-type': 'application/json'
-                        },
-                        body: JSON.stringify(user)
-                    })
-                        .then(res => res.json())
+                    registerUser(data.email, data.password)
                         .then(result => {
-                            registerUser(data.email, data.password)
-                                .then(result => {
-                                    const user = result.user;
-                                    console.log(user);
-                                    const userInfo = {
-                                        displayName: data.name,
-                                        photoURL: imgData.data.url
-                                    }
-                                    updateUserInfo(userInfo)
-                                        .then(() => {
+                            const user = result.user;
+                            console.log(user);
+                            const userInfo = {
+                                displayName: data.name,
+                                photoURL: imgData.data.url
+                            }
+                            updateUserInfo(userInfo)
+                                .then(() => {
+
+
+                                    fetch('http://localhost:5000/users', {
+                                        method: 'POST',
+                                        headers: {
+                                            'content-type': 'application/json'
+                                        },
+                                        body: JSON.stringify(userData)
+                                    })
+                                        .then(res => res.json())
+                                        .then(result => {
+
                                             toast.success('Registration Successfull')
                                             navigate('/')
                                         })
-                                        .catch(e => setRegisterError(e.message))
+                                        // fet
+                                        .catch(e => {
+                                            setRegisterError(e.message)
+                                        });
+
                                 })
                                 .catch(e => setRegisterError(e.message))
-
                         })
-                        .catch(e => {
-                            setRegisterError(e.message)
-                        });
+                        .catch(e => setRegisterError(e.message))
                 }
             })
             .catch(e => {

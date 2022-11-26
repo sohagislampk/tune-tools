@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs'
 import { ImLocation2 } from 'react-icons/im'
 import { Link } from 'react-router-dom';
+import { Authcontext } from '../../../Contexts/AuthProvider';
 import BookingModal from './BookingModal/BookingModal';
+import { MdVerifiedUser } from 'react-icons/md'
 const Product = ({ product }) => {
     const { _id, image, name, description, time, year, price, condition, location, originalPrice, sellerName } = product;
+    const { user } = useContext(Authcontext);
     const postYear = new Date(time).getFullYear();
     const postMonth = new Date(time).getMonth();
     const postDate = new Date(time).getDate();
@@ -28,7 +31,15 @@ const Product = ({ product }) => {
                 <div className='flex justify-between items-center font-bold'>
                     <div className='flex items-center' >
                         <BsFillPersonFill className='text-primary mr-1'></BsFillPersonFill>
-                        <h3> {sellerName}</h3>
+                        {
+                            user?.status === 'verified' ?
+                                <h3> {sellerName}</h3>
+                                :
+                                <div className='flex tooltip tooltip-primary' data-tip="Verified Seller">
+                                    <h3> {sellerName}</h3>
+                                    <p> <MdVerifiedUser className='text-primary' ></MdVerifiedUser></p>
+                                </div>
+                        }
                     </div>
                     <div className='flex items-center' >
                         <ImLocation2 className='text-primary mr-1'></ImLocation2>
