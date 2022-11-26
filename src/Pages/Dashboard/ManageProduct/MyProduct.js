@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const MyProduct = () => {
-    const { data: products = [], } = useQuery({
+    const { data: products = [], refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/products');
@@ -10,7 +11,26 @@ const MyProduct = () => {
             return data;
         }
     });
+    const handleAdvertise = (id, addStatus) => {
+        const productStatus = {
+            status: addStatus
+        }
+        fetch(`http://localhost:5000/products/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
 
+            body: JSON.stringify(productStatus)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    toast.success('Advertise product Successfully')
+                    refetch();
+                }
+            })
+    }
 
     return (
         <div className='mx-2 my-4'>
@@ -41,7 +61,15 @@ const MyProduct = () => {
                                 <td>${product.price}</td>
                                 <td>{product.category}</td>
                                 <td><button className='btn btn-xs btn-danger'>Delete</button></td>
-                                <td><button className='btn btn-xs btn-danger'>Advertise</button></td>
+                                <td>
+                                    {
+                                        product.status !== "advertise" ?
+                                            <button onClick={() => handleAdvertise(product._id, 'advertise')} className='btn btn-xs btn-danger'>Advertise</button>
+                                            :
+                                            <button onClick={() => handleAdvertise(product._id, 'available')} className='btn btn-xs btn-secondary'>Advertised</button>
+                                    }
+                                </td>
+
                             </tr>)
                         }
 

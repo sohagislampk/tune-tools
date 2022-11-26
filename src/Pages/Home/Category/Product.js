@@ -49,7 +49,7 @@ const Product = ({ product }) => {
                         <p>Purchase Year: {year}</p>
                     </div>
                 </div>
-                <p>{description.slice(0, 100)}...<Link to={`/products/${_id}`}><lebel className="text-accent font-semibold hover:text-primary hover:font-bold">see details</lebel></Link>
+                <p>{description.slice(0, 100)}...<Link to={`/products/${_id}`}><button className="text-accent font-semibold hover:text-primary hover:font-bold">see details</button></Link>
                 </p>
 
                 <span className='text-xs text-secondary'>Published Time : {date}</span>

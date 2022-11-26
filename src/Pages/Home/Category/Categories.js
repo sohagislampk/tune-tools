@@ -41,8 +41,8 @@ const Categories = () => {
             <div className='flex justify-between mx-10'>
                 {
                     instrumentCategories.map(category =>
-                        <Link to={`/category/${category.name}`}>
-                            <div key={category.id} className='flex flex-col items-center border-8 border-primary m-8 p-8 w-44 rounded-xl text-accent hover:border-accent hover:text-primary hover:border-4'>
+                        <Link key={category.id} to={`/category/${category.name}`}>
+                            <div className='flex flex-col items-center border-8 border-primary m-8 p-8 w-44 rounded-xl text-accent hover:border-accent hover:text-primary hover:border-4'>
                                 <p className='text-6xl mb-2'>{category.icon}</p>
                                 <p className='font-bold text-xl'>{category.name}</p>
                             </div>
