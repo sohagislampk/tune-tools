@@ -3,13 +3,19 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { Authcontext } from '../../Contexts/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 const Register = () => {
     const { registerUser, updateUserInfo } = useContext(Authcontext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [registerError, setRegisterError] = useState('');
+    const [userEmail, setUserEmail] = useState('');
+    const [token] = useToken(userEmail);
     const imageHostKey = process.env.REACT_APP_imgbb_key;
     const navigate = useNavigate();
+    if (token) {
+        navigate('/')
+    }
     const handleRegister = (data) => {
         setRegisterError('');
         const image = data.image[0];
@@ -53,7 +59,7 @@ const Register = () => {
                                         .then(result => {
 
                                             toast.success('Registration Successfull')
-                                            navigate('/')
+                                            setUserEmail(user.email)
                                         })
                                         // fet
                                         .catch(e => {

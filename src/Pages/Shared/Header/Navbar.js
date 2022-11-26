@@ -6,7 +6,9 @@ const Navbar = () => {
     const { user, logOut } = useContext(Authcontext);
     const handleLogout = () => {
         logOut()
-            .then(() => { })
+            .then(() => {
+                localStorage.removeItem('accessToken')
+            })
             .catch(() => { })
     }
     return (
