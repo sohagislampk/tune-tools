@@ -9,7 +9,11 @@ const MyProduct = () => {
     const { data: products = [], refetch, isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/products?email=${user.email}`);
+            const res = await fetch(`http://localhost:5000/products?email=${user.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }
@@ -21,7 +25,12 @@ const MyProduct = () => {
         fetch(`http://localhost:5000/products/${id}`, {
             method: 'PUT',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+
+
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+
+
             },
 
             body: JSON.stringify(productStatus)
@@ -37,7 +46,11 @@ const MyProduct = () => {
     const handleDelete = (id) => {
         const url = `http://localhost:5000/products/${id}`
         fetch(url, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+
         })
             .then(res => res.json())
             .then(data => {
@@ -90,7 +103,6 @@ const MyProduct = () => {
                                                     : <button button onClick={() => handleAdvertise(product._id, 'available')} className='btn btn-xs btn-secondary'>Advertised</button>
                                             }
                                             </>
-
                                     }
 
                                 </td>

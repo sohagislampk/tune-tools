@@ -9,7 +9,11 @@ const Bookings = () => {
     const { data: bookings = [], refetch, isLoading } = useQuery({
         queryKey: ['bookings'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/bookings?email=${user.email}`);
+            const res = await fetch(`http://localhost:5000/bookings?email=${user.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data;
         }
@@ -19,6 +23,9 @@ const Bookings = () => {
         console.log(url);
         fetch(url, {
             method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
 
         })
             .then(res => res.json())

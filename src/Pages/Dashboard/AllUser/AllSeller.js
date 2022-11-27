@@ -15,7 +15,12 @@ const AllSeller = () => {
     const handleDelete = (id) => {
         const url = `http://localhost:5000/users/${id}`
         fetch(url, {
-            method: 'DELETE'
+            method: 'DELETE',
+
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+
         })
             .then(res => res.json())
             .then(data => {
@@ -29,6 +34,11 @@ const AllSeller = () => {
         const url = `http://localhost:5000/users/${id}`
         fetch(url, {
             method: 'PUT',
+
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+
         })
             .then(res => res.json())
             .then(data => {
