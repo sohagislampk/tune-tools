@@ -7,6 +7,7 @@ import AllBuyer from '../../Pages/Dashboard/AllUser/AllBuyer';
 import AllSeller from '../../Pages/Dashboard/AllUser/AllSeller';
 import AllUser from '../../Pages/Dashboard/AllUser/AllUser';
 import Bookings from '../../Pages/Dashboard/Bookings/Bookings';
+import Dashboard from '../../Pages/Dashboard/Dashboard/Dashboard';
 import MyProduct from '../../Pages/Dashboard/ManageProduct/MyProduct';
 import Category from '../../Pages/Home/Category/Category';
 import ProductDetails from '../../Pages/Home/Category/ProductDetails';
@@ -52,6 +53,10 @@ const routes = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
+                element: <Dashboard></Dashboard>
+            },
+            {
+                path: '/dashboard/myproduct',
                 element: <SellerRoute><MyProduct></MyProduct></SellerRoute>
             },
             {
