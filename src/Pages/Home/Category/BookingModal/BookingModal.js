@@ -8,7 +8,7 @@ const BookingModal = ({ product }) => {
     const { user } = useContext(Authcontext);
     const [bookingError, setBookingError] = useState('');
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { name, price, image } = product;
+    const { name, price, image, _id } = product;
     const navigate = useNavigate();
     const handleBooking = data => {
         setBookingError('');
@@ -19,7 +19,8 @@ const BookingModal = ({ product }) => {
             price: price,
             image: image,
             phone: data.phone,
-            location: data.location
+            location: data.location,
+            productId: _id
 
         }
         fetch('http://localhost:5000/bookings', {

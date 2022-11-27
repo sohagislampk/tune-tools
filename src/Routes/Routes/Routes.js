@@ -5,11 +5,11 @@ import Main from '../../Layouts/Main';
 import AddProduct from '../../Pages/Dashboard/AddProduc/AddProduct';
 import AllBuyer from '../../Pages/Dashboard/AllUser/AllBuyer';
 import AllSeller from '../../Pages/Dashboard/AllUser/AllSeller';
-import AllUser from '../../Pages/Dashboard/AllUser/AllUser';
+
 import Bookings from '../../Pages/Dashboard/Bookings/Bookings';
 import Dashboard from '../../Pages/Dashboard/Dashboard/Dashboard';
 import MyProduct from '../../Pages/Dashboard/ManageProduct/MyProduct';
-import BookingModal from '../../Pages/Home/Category/BookingModal/BookingModal';
+import Payment from '../../Pages/Dashboard/Payment/Payment';
 import Category from '../../Pages/Home/Category/Category';
 import ProductDetails from '../../Pages/Home/Category/ProductDetails';
 import Home from '../../Pages/Home/Home/Home';
@@ -61,10 +61,7 @@ const routes = createBrowserRouter([
                 path: '/dashboard/myproduct',
                 element: <SellerRoute><MyProduct></MyProduct></SellerRoute>
             },
-            {
-                path: '/dashboard/allusers',
-                element: <AdminRoute><AllUser></AllUser></AdminRoute>
-            },
+
             {
                 path: '/dashboard/allseller',
                 element: <AdminRoute><AllSeller></AllSeller></AdminRoute>
@@ -80,6 +77,11 @@ const routes = createBrowserRouter([
             {
                 path: '/dashboard/bookings',
                 element: <Bookings></Bookings>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment></Payment>,
+                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`)
             }
         ]
     }

@@ -20,7 +20,7 @@ const Product = ({ product }) => {
     return (
         <>
             {
-                status !== "sold" && <div className="card card-compact w-96 bg-base-100 shadow-xl indicator">
+                status !== "sold" && <div className="card card-compact my-4 w-96 bg-base-100 shadow-xl indicator">
 
                     <figure><img src={image} alt="Shoes" /></figure>
 

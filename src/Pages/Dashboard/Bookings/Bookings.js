@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import { Authcontext } from '../../../Contexts/AuthProvider';
 import Loading from '../../Shared/Loading/Loading';
 
@@ -41,7 +42,7 @@ const Bookings = () => {
 
     return (
         <div className='mx-2 mt-4 mb-8'>
-            <h2 className="text-3xl mb-2 ml-2">My Products</h2>
+            <h2 className="text-3xl mb-2 ml-2">My Bookings</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -60,6 +61,7 @@ const Bookings = () => {
                         {
                             bookings.map((booking, i) => <tr key={booking._id}>
                                 <th>{i + 1}</th>
+
                                 <td><div className="avatar">
                                     <div className="w-16 rounded">
                                         <img src={booking.image} alt="" />
@@ -71,11 +73,14 @@ const Bookings = () => {
                                 <td>{booking.location}</td>
                                 <td><button onClick={() => handleDelete(booking._id)} className='btn btn-xs btn-denger'>Delete</button></td>
                                 <td>
+
                                     {
-                                        booking.status !== "paid" ?
-                                            <button className='btn btn-xs btn-danger'>Pay</button>
-                                            :
-                                            <button className='btn btn-xs btn-secondary'>Paid</button>
+                                        booking.price && !booking.paid &&
+                                        <Link to={`/dashboard/payment/${booking._id}`}><button className='btn btn-xs btn-danger'>Pay</button></Link>
+                                    }
+                                    {
+                                        booking.price && booking.paid &&
+                                        <button className='btn btn-xs btn-secondary'>Paid</button>
                                     }
                                 </td>
 
