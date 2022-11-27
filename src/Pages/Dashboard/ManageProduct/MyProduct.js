@@ -34,6 +34,19 @@ const MyProduct = () => {
                 }
             })
     }
+    const handleDelete = (id) => {
+        const url = `http://localhost:5000/products/${id}`
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success('Product Deleted Successfully')
+                    refetch()
+                }
+            })
+    }
     if (isLoading) {
         return <Loading></Loading>
     }
@@ -65,14 +78,21 @@ const MyProduct = () => {
                                 <td>{product.name}</td>
                                 <td>${product.price}</td>
                                 <td>{product.category}</td>
-                                <td><button className='btn btn-xs btn-danger'>Delete</button></td>
+                                <td><button onClick={() => handleDelete(product._id)} className='btn btn-xs btn-danger'>Delete</button></td>
                                 <td>
                                     {
-                                        product.status !== "advertise" ?
+                                        product.status !== "advertise" && product.status !== 'sold' ?
                                             <button onClick={() => handleAdvertise(product._id, 'advertise')} className='btn btn-xs btn-danger'>Advertise</button>
                                             :
-                                            <button onClick={() => handleAdvertise(product._id, 'available')} className='btn btn-xs btn-secondary'>Advertised</button>
+                                            <>{
+                                                product.status === 'sold'
+                                                    ? <button className='btn btn-xs btn-secondary disabled '>Sold Out</button>
+                                                    : <button button onClick={() => handleAdvertise(product._id, 'available')} className='btn btn-xs btn-secondary'>Advertised</button>
+                                            }
+                                            </>
+
                                     }
+
                                 </td>
 
                             </tr>)
@@ -81,7 +101,7 @@ const MyProduct = () => {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div >
     );
 };
 

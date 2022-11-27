@@ -27,7 +27,7 @@ const AddProduct = () => {
 
                     const product = {
                         sellerName: user.displayName,
-                        SellerEmail: user.email,
+                        sellerEmail: user.email,
                         name: data.name,
                         price: data.price,
                         originalPrice: data.originalPrice,
