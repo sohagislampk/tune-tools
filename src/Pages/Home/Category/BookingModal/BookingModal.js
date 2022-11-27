@@ -26,9 +26,9 @@ const BookingModal = ({ product }) => {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
-                headers: {
-                    authorization: `bearer ${localStorage.getItem('accessToken')}`
-                }
+
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+
             },
             body: JSON.stringify(booking)
         })

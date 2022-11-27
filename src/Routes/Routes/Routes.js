@@ -9,6 +9,7 @@ import AllUser from '../../Pages/Dashboard/AllUser/AllUser';
 import Bookings from '../../Pages/Dashboard/Bookings/Bookings';
 import Dashboard from '../../Pages/Dashboard/Dashboard/Dashboard';
 import MyProduct from '../../Pages/Dashboard/ManageProduct/MyProduct';
+import BookingModal from '../../Pages/Home/Category/BookingModal/BookingModal';
 import Category from '../../Pages/Home/Category/Category';
 import ProductDetails from '../../Pages/Home/Category/ProductDetails';
 import Home from '../../Pages/Home/Home/Home';
@@ -44,7 +45,8 @@ const routes = createBrowserRouter([
                 path: '/products/:id',
                 element: <ProductDetails></ProductDetails>,
                 loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
-            }
+            },
+
         ]
     },
     {

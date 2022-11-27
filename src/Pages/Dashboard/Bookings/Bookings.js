@@ -20,7 +20,6 @@ const Bookings = () => {
     });
     const handleDelete = (id) => {
         const url = `http://localhost:5000/bookings/${id}`
-        console.log(url);
         fetch(url, {
             method: 'DELETE',
             headers: {

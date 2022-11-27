@@ -73,7 +73,12 @@ const Product = ({ product }) => {
 
                         <span className='text-xs text-secondary'>Published Time : {date}</span>
                         <div className="card-actions justify-center">
-                            <label htmlFor="booking-modal" className="btn btn-accent text-white">Book Now</label>
+                            {
+                                user?.email ?
+                                    <label htmlFor="booking-modal" className="btn btn-accent text-white">Book Now</label>
+                                    :
+                                    <Link to="/login" ><button className="btn btn-accent text-white">Book Now</button></Link>
+                            }
                         </div>
                     </div>
                     <BookingModal product={product}></BookingModal>

@@ -5,7 +5,7 @@ import Product from './Product';
 
 const Category = () => {
     const products = useLoaderData();
-    const { name } = useParams()
+    const { name } = useParams();
 
     return (
         <div>

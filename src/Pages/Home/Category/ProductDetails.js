@@ -1,16 +1,23 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useLoaderData, useLocation } from 'react-router-dom';
 import { BsFillPersonFill } from 'react-icons/bs'
 import { ImLocation2 } from 'react-icons/im'
+import BookingModal from './BookingModal/BookingModal';
+import { Authcontext } from '../../../Contexts/AuthProvider';
 const ProductDetails = () => {
+    const { user } = useContext(Authcontext)
     const productDetails = useLoaderData();
+
+    const location = useLocation();
+
+
     const {
         name,
         image,
         price,
         originalPrice,
         sellerName,
-        location,
+        location: locationForProduct,
         condition,
         description,
         time,
@@ -41,7 +48,7 @@ const ProductDetails = () => {
                     </div>
                     <div className='flex items-center' >
                         <ImLocation2 className='text-primary mr-1'></ImLocation2>
-                        <p> {location}</p>
+                        <p> {locationForProduct}</p>
                     </div>
 
                 </div>
@@ -65,9 +72,15 @@ const ProductDetails = () => {
                 <span className='text-xs text-secondary'>Published Time : {date}</span>
                 <div className="card-actions justify-center">
 
-                    <button className="btn btn-accent text-white">Book Now</button>
+                    {
+                        user?.email ?
+                            <label htmlFor="booking-modal" className="btn btn-accent text-white">Book Now</label>
+                            :
+                            <Link to="/login" ><button className="btn btn-accent text-white">Book Now</button></Link>
+                    }
                 </div>
             </div>
+            <BookingModal product={productDetails}></BookingModal>
         </div>
     );
 };
