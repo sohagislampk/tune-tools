@@ -9,7 +9,7 @@ const MyProduct = () => {
     const { data: products = [], refetch, isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/products?email=${user.email}`, {
+            const res = await fetch(`https://tune-tools-server.vercel.app/products?email=${user.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -22,7 +22,7 @@ const MyProduct = () => {
         const productStatus = {
             status: addStatus
         }
-        fetch(`http://localhost:5000/products/${id}`, {
+        fetch(`https://tune-tools-server.vercel.app/products/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
@@ -44,7 +44,7 @@ const MyProduct = () => {
             })
     }
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/products/${id}`
+        const url = `https://tune-tools-server.vercel.app/products/${id}`
         fetch(url, {
             method: 'DELETE',
             headers: {

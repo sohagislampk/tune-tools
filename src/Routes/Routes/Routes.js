@@ -42,12 +42,12 @@ const routes = createBrowserRouter([
             {
                 path: '/category/:name',
                 element: <PrivateRoute><Category></Category></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.name}`)
+                loader: ({ params }) => fetch(`https://tune-tools-server.vercel.app/category/${params.name}`)
             },
             {
                 path: '/products/:id',
                 element: <ProductDetails></ProductDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
+                loader: ({ params }) => fetch(`https://tune-tools-server.vercel.app/products/${params.id}`)
             },
             {
                 path: '/blog',
@@ -88,7 +88,7 @@ const routes = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`)
+                loader: ({ params }) => fetch(`https://tune-tools-server.vercel.app/bookings/${params.id}`)
             },
             {
                 path: '/dashboard/wishlist',

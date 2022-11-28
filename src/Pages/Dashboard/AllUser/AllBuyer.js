@@ -7,7 +7,7 @@ const AllBuyer = () => {
     const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users?role=buyer', {
+            const res = await fetch('https://tune-tools-server.vercel.app/users?role=buyer', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -18,7 +18,7 @@ const AllBuyer = () => {
     });
 
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/users/${id}`
+        const url = `https://tune-tools-server.vercel.app/users/${id}`
         fetch(url, {
             method: 'DELETE',
 

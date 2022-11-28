@@ -7,7 +7,7 @@ const AllSeller = () => {
     const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users?role=seller', {
+            const res = await fetch('https://tune-tools-server.vercel.app/users?role=seller', {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
@@ -18,7 +18,7 @@ const AllSeller = () => {
         }
     });
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/users/${id}`
+        const url = `https://tune-tools-server.vercel.app/users/${id}`
         fetch(url, {
             method: 'DELETE',
 
@@ -35,15 +35,19 @@ const AllSeller = () => {
                 }
             })
     }
-    const handleVerify = (id) => {
+    const handleVerify = (id, userEmail) => {
+        const email = {
+            email: userEmail
+        }
         const url = `http://localhost:5000/users/${id}`
         fetch(url, {
             method: 'PUT',
 
             headers: {
+                'content-type': 'application/json',
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
-            }
-
+            },
+            body: JSON.stringify(email)
         })
             .then(res => res.json())
             .then(data => {
@@ -84,7 +88,7 @@ const AllSeller = () => {
                                 <td>
                                     {
                                         user.status !== "verified" ?
-                                            <button onClick={() => handleVerify(user._id)} className='btn btn-xs btn-danger'>Verify</button>
+                                            <button onClick={() => handleVerify(user._id, user.email)} className='btn btn-xs btn-danger'>Verify</button>
                                             :
                                             <button className='btn btn-xs btn-secondary'>Verified</button>
                                     }

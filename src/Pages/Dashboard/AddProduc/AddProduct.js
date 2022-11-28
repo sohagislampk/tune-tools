@@ -41,7 +41,7 @@ const AddProduct = () => {
                         time: Date()
                     }
                     // save Product to DB
-                    fetch('http://localhost:5000/products', {
+                    fetch('https://tune-tools-server.vercel.app/products', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
@@ -55,7 +55,7 @@ const AddProduct = () => {
                         .then(result => {
                             console.log(result);
                             toast.success('Product added Successfully')
-                            navigate('/dashboard')
+                            navigate('/dashboard/myproduct')
 
                         })
                         .catch(e => {

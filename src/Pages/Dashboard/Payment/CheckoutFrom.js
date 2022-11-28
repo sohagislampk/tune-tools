@@ -13,7 +13,7 @@ const CheckoutFrom = ({ booking }) => {
 
     useEffect(() => {
 
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://tune-tools-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -78,7 +78,7 @@ const CheckoutFrom = ({ booking }) => {
                 bookingId: _id,
                 productId: productId
             }
-            fetch('http://localhost:5000/payments', {
+            fetch('https://tune-tools-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

@@ -10,7 +10,7 @@ const Category = () => {
     return (
         <div>
             <h1 className='text-center text-3xl font-bold mt-8'>All {name} Product</h1>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-4 my-8 mx-4 justify-between lg:mx-8'>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-12 my-4 mx-8 justify-between lg:mx-8'>
                 {
                     products.length ?
                         <>

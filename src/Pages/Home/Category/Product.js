@@ -10,8 +10,8 @@ import toast from 'react-hot-toast';
 import axios from "axios";
 
 const Product = ({ product }) => {
-    const { _id, image, name, description, time, year, price, condition, location, originalPrice, sellerName, status, wishlist } = product;
-    const [refresh, setRefresh] = useState(true)
+    const { _id, image, name, description, time, year, price, condition, location, originalPrice, sellerName, status, wishlist, sellerEmail, userRole } = product;
+    const [dbUser, setDbUser] = useState({})
     const { user } = useContext(Authcontext);
     const postYear = new Date(time).getFullYear();
     const postMonth = new Date(time).getMonth();
@@ -21,6 +21,18 @@ const Product = ({ product }) => {
     const currentYear = new Date().getFullYear();
     const yearOfUse = currentYear - year;
     const date = `${postHour}:${postMin} Date : ${postDate}.${postMonth}.${postYear}`
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${sellerEmail.email}`, {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(result => {
+                setDbUser(result)
+            })
+    }, [])
 
 
     const handleWishlist = (id, wishlist) => {
@@ -37,7 +49,7 @@ const Product = ({ product }) => {
             authorization: `bearer ${localStorage.getItem('accessToken')}`
         }
 
-        axios.put(`http://localhost:5000/products/${id}`, wishlistAdd, { headers })
+        axios.put(`https://tune-tools-server.vercel.app/products/${id}`, wishlistAdd, { headers })
             .then(result => {
 
                 if (result.data.modifiedCount > 0 || result.data.acknowledged === true) {
@@ -70,13 +82,14 @@ const Product = ({ product }) => {
                             <div className='flex items-center' >
                                 <BsFillPersonFill className='text-primary mr-1'></BsFillPersonFill>
                                 {
-                                    user?.status === 'verified' ?
-                                        <h3> {sellerName}</h3>
-                                        :
+                                    userRole === 'verified' ?
                                         <div className='flex tooltip tooltip-primary' data-tip="Verified Seller">
                                             <h3> {sellerName}</h3>
                                             <p> <MdVerifiedUser className='text-primary' ></MdVerifiedUser></p>
                                         </div>
+                                        :
+                                        <h3> {sellerName}</h3>
+
                                 }
                             </div>
                             <div className='flex items-center' >
@@ -112,8 +125,8 @@ const Product = ({ product }) => {
                             }
                             {
                                 wishlist === 'added'
-                                    ? <AiFillHeart className='text-5xl text-accent'></AiFillHeart>
-                                    : <AiOutlineHeart onClick={() => handleWishlist(_id, 'added')} className='text-5xl text-primary'></AiOutlineHeart>
+                                    ? <AiFillHeart className='tooltip text-5xl text-accent' data-tip="Wishlisted"></AiFillHeart>
+                                    : <AiOutlineHeart onClick={() => handleWishlist(_id, 'added')} className=' tooltip text-5xl text-primary' data-tip="Add to Wishlist"></AiOutlineHeart>
                             }
                         </div>
                     </div>

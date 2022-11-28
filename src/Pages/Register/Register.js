@@ -81,7 +81,7 @@ const Register = () => {
             .catch(e => setRegisterError(e.message))
     }
     const saveUser = (userInfo, email) => {
-        fetch('http://localhost:5000/users', {
+        fetch('https://tune-tools-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

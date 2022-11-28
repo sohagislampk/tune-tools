@@ -10,7 +10,7 @@ const DashboardLayout = () => {
     const { data: dbUser = [], isLoading } = useQuery({
         queryKey: ['dbUser'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users/${user.email}`, {
+            const res = await fetch(`https://tune-tools-server.vercel.app/users/${user.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
                 }
