@@ -39,10 +39,10 @@ const Navbar = () => {
                                         </li>
 
                                         <li><Link to={'/dashboard'}>Dashboard</Link></li>
-                                        <li><Link>Blog</Link></li>
+                                        <li><Link to={'/blog'}>Blog</Link></li>
                                     </>
                                     :
-                                    <li><Link>Blog</Link></li>
+                                    <li><Link to={'/blog'}>Blog</Link></li>
                             }
                         </ul>
                     </div>
@@ -72,10 +72,10 @@ const Navbar = () => {
                                     </li>
 
                                     <li><Link to={'/dashboard'}>Dashboard</Link></li>
-                                    <li><Link>Blog</Link></li>
+                                    <li><Link to={'/blog'}>Blog</Link></li>
                                 </>
                                 :
-                                <li><Link>Blog</Link></li>
+                                <li><Link to={'/blog'}>Blog</Link></li>
                         }
 
                     </ul>

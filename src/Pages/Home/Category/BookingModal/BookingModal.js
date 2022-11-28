@@ -36,8 +36,12 @@ const BookingModal = ({ product }) => {
             .then(res => res.json())
             .then(result => {
                 console.log(result);
-                toast.success('The Item is Successfully Booked')
-                navigate('/dashboard/bookings')
+                if (result.acknowledged === true) {
+                    toast.success('The Item is Successfully Booked')
+                    navigate('/dashboard/bookings')
+                    return
+                }
+                toast.error("Sorry The item you have already Booked")
             })
             .catch(error => setBookingError(error.message))
 

@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import DashboardLayout from '../../Layouts/DashboardLayout';
 import Main from '../../Layouts/Main';
 import Error404 from '../../Pages/404error/Error404';
+import Blog from '../../Pages/Blog/Blog';
 import AddProduct from '../../Pages/Dashboard/AddProduc/AddProduct';
 import AllBuyer from '../../Pages/Dashboard/AllUser/AllBuyer';
 import AllSeller from '../../Pages/Dashboard/AllUser/AllSeller';
@@ -47,6 +48,10 @@ const routes = createBrowserRouter([
                 element: <ProductDetails></ProductDetails>,
                 loader: ({ params }) => fetch(`http://localhost:5000/products/${params.id}`)
             },
+            {
+                path: '/blog',
+                element: <Blog></Blog>
+            }
 
         ]
     },
