@@ -52,6 +52,7 @@ const AllSeller = () => {
                     refetch();
                 }
             })
+            .catch(e => console.error(e.message));
     }
     if (isLoading) {
         return <Loading></Loading>

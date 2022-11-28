@@ -5,7 +5,7 @@ import { Authcontext } from '../../Contexts/AuthProvider';
 import useToken from '../../hooks/useToken';
 
 const Login = () => {
-    const { signIn } = useContext(Authcontext);
+    const { signIn, googleLogin } = useContext(Authcontext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [loginError, setLoginError] = useState('')
     const [userEmail, setUserEmail] = useState('')
@@ -31,6 +31,15 @@ const Login = () => {
                 setLoginError(error.message)
             })
 
+    }
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+                setUserEmail(user.email)
+            })
+            .catch(e => setLoginError(e.message))
     }
     return (
         <div className="flex flex-col my-10 items-center" >
@@ -69,8 +78,9 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-
             </form>
+            <div className="divider lg:w-1/3 mx-auto">OR</div>
+            <button onClick={handleGoogleLogin} className='btn btn-outline btn-accent lg:w-1/3'>CONTINUE WITH GOOGLE</button>
         </div>
     );
 };

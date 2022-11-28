@@ -12,7 +12,7 @@ const Navbar = () => {
             .catch(() => { })
     }
     return (
-        <div>
+        <div >
             <div className="navbar text-white bg-primary">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -48,7 +48,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className='flex items-center'>
-                        <img className='w-10 hidden lg:block' src="Tune Tools.png" alt="" />
+                        <img className='w-10 hidden lg:block ml-8' src="Tune Tools.png" alt="" />
                         <p className="text-2xl font-bold">Tune Tools</p>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ const Navbar = () => {
 
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end lg:mr-8">
                     {
                         user?.uid ?
                             <button onClick={handleLogout} className="btn btn-accent mx-4 px-8 text-white hidden lg:block">Logout</button>

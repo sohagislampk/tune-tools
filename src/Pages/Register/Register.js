@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -6,7 +7,7 @@ import { Authcontext } from '../../Contexts/AuthProvider';
 import useToken from '../../hooks/useToken';
 
 const Register = () => {
-    const { registerUser, updateUserInfo } = useContext(Authcontext);
+    const { registerUser, updateUserInfo, googleLogin } = useContext(Authcontext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [registerError, setRegisterError] = useState('');
     const [userEmail, setUserEmail] = useState('');
@@ -47,25 +48,7 @@ const Register = () => {
                             updateUserInfo(userInfo)
                                 .then(() => {
 
-
-                                    fetch('http://localhost:5000/users', {
-                                        method: 'POST',
-                                        headers: {
-                                            'content-type': 'application/json'
-                                        },
-                                        body: JSON.stringify(userData)
-                                    })
-                                        .then(res => res.json())
-                                        .then(result => {
-
-                                            toast.success('Registration Successfull')
-                                            setUserEmail(user.email)
-                                        })
-                                        // fet
-                                        .catch(e => {
-                                            setRegisterError(e.message)
-                                        });
-
+                                    saveUser(userData, user.email)
                                 })
                                 .catch(e => setRegisterError(e.message))
                         })
@@ -76,7 +59,50 @@ const Register = () => {
                 setRegisterError(e.message);
             });
     }
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+                const userInfo = {
+                    displayName: user.displayName,
+                    photoURL: user.photoURL,
+                    email: user.email
+                }
+                updateUserInfo(userInfo)
+                const userData = {
+                    name: user.displayName,
+                    email: user.email,
+                    image: user.photoURL,
+                    role: 'buyer'
+                }
+                saveUser(userData, user.email)
+            })
+            .catch(e => setRegisterError(e.message))
+    }
+    const saveUser = (userInfo, email) => {
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(userInfo)
+        })
+            .then(res => res.json())
+            .then(result => {
 
+                if (result.acknowledged === true) {
+
+                    toast.success('Registration Successfull')
+                    setUserEmail(email)
+                } else {
+                    setRegisterError('You have Another Account with this Email')
+                }
+            })
+            .catch(e => {
+                setRegisterError(e.message)
+            });
+    }
     return (
         <div className="flex flex-col my-10 items-center" >
             <div >
@@ -158,10 +184,15 @@ const Register = () => {
                             <button type='submit' className="btn btn-accent text-white">Register</button>
                             {registerError && <p className='text-red-500'>{registerError}</p>}
                         </div>
+
                     </div>
                 </div>
 
             </form>
+            <div className='form-control'>
+                <div className="divider lg:w-1/3 mx-auto">OR</div>
+                <button onClick={handleGoogleLogin} className='btn btn-outline btn-accent w-full'>CONTINUE WITH GOOGLE</button>
+            </div>
         </div>
     );
 };

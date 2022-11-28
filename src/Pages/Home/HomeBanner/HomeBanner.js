@@ -5,7 +5,7 @@ const HomeBanner = () => {
         <div>
             <div className="hero h-4/5 bg-gradient-to-r from-white via-secondary to-white">
                 <div className="hero-content pb-0 flex-col lg:flex-row-reverse">
-                    <img src={banner1} className="lg:w-1/2 lg:mt-[-80px]" alt='' />
+                    <img src={banner1} className="lg:w-1/2 h-4/5" alt='' />
                     <div className='lg:w-1/2 '>
                         <h1 className="text-5xl font-bold">Box Office News!</h1>
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>

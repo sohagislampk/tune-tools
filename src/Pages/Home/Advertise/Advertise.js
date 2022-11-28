@@ -17,7 +17,7 @@ const Advertise = () => {
         return <Loading></Loading>
     }
     return (
-        <div className='grid grid-cols-1 lg:grid-cols-3 lg:gap-4 my-8 mx-4 lg:mx-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 lg:gap-16 my-8 mx-4 justify-between lg:mx-8'>
             {
                 products.map(product => <Product
                     key={product._id}

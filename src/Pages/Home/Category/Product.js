@@ -5,8 +5,12 @@ import { Link } from 'react-router-dom';
 import { Authcontext } from '../../../Contexts/AuthProvider';
 import BookingModal from './BookingModal/BookingModal';
 import { MdVerifiedUser } from 'react-icons/md'
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
+import toast from 'react-hot-toast';
+
+
 const Product = ({ product }) => {
-    const { _id, image, name, description, time, year, price, condition, location, originalPrice, sellerName, status } = product;
+    const { _id, image, name, description, time, year, price, condition, location, originalPrice, sellerName, status, wishlist } = product;
     const { user } = useContext(Authcontext);
     const postYear = new Date(time).getFullYear();
     const postMonth = new Date(time).getMonth();
@@ -16,11 +20,34 @@ const Product = ({ product }) => {
     const currentYear = new Date().getFullYear();
     const yearOfUse = currentYear - year;
     const date = `${postHour}:${postMin} Date : ${postDate}.${postMonth}.${postYear}`
-
+    const handleWishlist = (id, wishlist) => {
+        const wishlistAdd = {
+            wishlist: wishlist,
+            email: user.email,
+            image: image,
+            name: name,
+            price: price,
+            buyerName: user.displayName
+        }
+        fetch(`http://localhost:5000/products/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(wishlistAdd)
+        }
+        ).then(res => res.json())
+            .then(result => {
+                if (result.modifiedCount > 0 || result.acknowledged === true) {
+                    toast.success('Added whishlist Successfully')
+                }
+            })
+    }
     return (
         <>
             {
-                status !== "sold" && <div className="card card-compact my-4 w-full lg:w-96 bg-base-100 shadow-xl indicator">
+                status !== "sold" && <div className="card card-compact my-8 w-full bg-base-100 shadow-xl indicator">
 
                     <figure><img src={image} alt="Shoes" /></figure>
 
@@ -78,6 +105,11 @@ const Product = ({ product }) => {
                                     <label htmlFor="booking-modal" className="btn btn-accent text-white">Book Now</label>
                                     :
                                     <Link to="/login" ><button className="btn btn-accent text-white">Book Now</button></Link>
+                            }
+                            {
+                                wishlist === 'added'
+                                    ? <AiFillHeart className='text-5xl text-accent'></AiFillHeart>
+                                    : <AiOutlineHeart onClick={() => handleWishlist(_id, 'added')} className='text-5xl text-primary'></AiOutlineHeart>
                             }
                         </div>
                     </div>
