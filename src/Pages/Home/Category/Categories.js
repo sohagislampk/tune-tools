@@ -36,9 +36,9 @@ const Categories = () => {
     ]
 
     return (
-        <div className='text-center my-10'>
+        <div className='text-center my-10 '>
             <h1 className='text-2xl font-bold'>Categories</h1>
-            <div className='flex justify-between mx-10'>
+            <div className='flex flex-col justify-center items-center lg:flex-row lg:justify-between mx-4 lg:mx-10'>
                 {
                     instrumentCategories.map(category =>
                         <Link key={category.id} to={`/category/${category.name}`}>

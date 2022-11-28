@@ -5,7 +5,7 @@ const Blog = () => {
 
     return (
         <div>
-            <div tabIndex={0} className="mx-10 my-10 collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+            <div tabIndex={0} className=" mx-4 my-4 md:mx-10 md:my-10 collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
                 <div className="collapse-title text-xl font-medium">
                     What are the different ways to manage a state in a React application?
                 </div>
@@ -42,7 +42,7 @@ const Blog = () => {
                 </div>
             </div>
 
-            <div tabIndex={0} className="mx-10 my-10 collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+            <div tabIndex={0} className="mx-4 my-4 md:mx-10 md:my-10 collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
                 <div className="collapse-title text-xl font-medium">
                     How does prototypical inheritance work?
                 </div>
@@ -54,7 +54,7 @@ const Blog = () => {
                     <p>So, the core idea of Prototypal Inheritance is that an object can point to another object and inherit all its properties. The main purpose is to allow multiple instances of an object to share common properties, hence, the Singleton Pattern.</p>
                 </div>
             </div>
-            <div tabIndex={0} className="mx-10 my-10 collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+            <div tabIndex={0} className="mx-4 my-4 md:mx-10 md:my-10 collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
                 <div className="collapse-title text-xl font-medium">
                     What is a unit test? Why should we write unit tests?
                 </div>
@@ -74,7 +74,7 @@ const Blog = () => {
                         In the testing pyramid, unit tests are faster than integration and end-to-end. They are more assertive and return quick feedback. </p>
                 </div>
             </div>
-            <div tabIndex={0} className="mx-10 my-10 collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+            <div tabIndex={0} className="mx-4 my-4 md:mx-10 md:my-10 collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
                 <div className="collapse-title text-xl font-medium">
                     React vs. Angular vs. Vue?
                 </div>

@@ -100,7 +100,7 @@ const MyProduct = () => {
                                             <>{
                                                 product.status === 'sold'
                                                     ? <button className='btn btn-xs btn-secondary disabled '>Sold Out</button>
-                                                    : <button button onClick={() => handleAdvertise(product._id, 'available')} className='btn btn-xs btn-secondary'>Advertised</button>
+                                                    : <button onClick={() => handleAdvertise(product._id, 'available')} className='btn btn-xs btn-secondary'>Advertised</button>
                                             }
                                             </>
                                     }

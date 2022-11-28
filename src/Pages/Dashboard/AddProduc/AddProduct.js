@@ -68,11 +68,11 @@ const AddProduct = () => {
             });
     }
     return (
-        <div className="flex flex-col my-10 items-center" >
+        <div className="flex flex-col my-4 md:my-10 items-center" >
             <div >
-                <h1 className="text-5xl font-bold mb-6">Add a Product now!</h1>
+                <h1 className="text-2xl md:text-5xl font-bold mb-6">Add a Product now!</h1>
             </div>
-            <form onSubmit={handleSubmit(handleAddProduct)} className='w-4/6' >
+            <form onSubmit={handleSubmit(handleAddProduct)} className='w-full md:w-4/6' >
                 <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
                     <div className="card-body">
                         <div className="form-control">
@@ -85,8 +85,8 @@ const AddProduct = () => {
                             {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
                         </div>
 
-                        <div className='flex justify-between'>
-                            <div className="form-control w-1/3 mr-2">
+                        <div className='md:flex justify-between'>
+                            <div className="form-control w-full md:w-1/3 md:mr-2">
                                 <label className="label">
                                     <span className="label-text">Resale Price</span>
                                 </label>
@@ -95,14 +95,14 @@ const AddProduct = () => {
                                 })} className="input input-bordered" />
                                 {errors.price && <p className='text-red-500'>{errors.price.message}</p>}
                             </div>
-                            <div className="form-control w-1/3 mx-2">
+                            <div className="form-control w-full md:w-1/3 md:mx-2">
                                 <label className="label">
                                     <span className="label-text">Original Price</span>
                                 </label>
                                 <input type="number" placeholder="Original Price" {...register("originalPrice")} className="input input-bordered" />
                                 {errors.price && <p className='text-red-500'>{errors.price.message}</p>}
                             </div>
-                            <div className="form-control w-1/3 ml-2">
+                            <div className="form-control w-full md:w-1/3 md:ml-2">
                                 <label className="label">
                                     <span className="label-text">Purchase Year</span>
                                 </label>
@@ -114,8 +114,8 @@ const AddProduct = () => {
                                 {errors.year && <p className='text-red-500'>{errors.year.message}</p>}
                             </div>
                         </div>
-                        <div className='flex justify-between'>
-                            <div className="form-control w-1/2 mr-2">
+                        <div className='md:flex justify-between'>
+                            <div className="form-control w-full md:w-1/2 md:mr-2">
                                 <label className="label">
                                     <span className="label-text">Mobile Number</span>
                                 </label>
@@ -126,7 +126,7 @@ const AddProduct = () => {
                                     className="input input-bordered" />
                                 {errors.number && <p className='text-red-500'>{errors.number.message}</p>}
                             </div>
-                            <div className="form-control w-1/2 ml-2">
+                            <div className="form-control w-full md:w-1/2 md:ml-2">
                                 <label className="label">
                                     <span className="label-text">Location</span>
                                 </label>
@@ -149,9 +149,9 @@ const AddProduct = () => {
                                 className="textarea textarea-bordered" />
                             {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
                         </div>
-                        <div className='flex justify-between'>
+                        <div className='md:flex justify-between'>
 
-                            <div className="form-control w-1/2 mr-2">
+                            <div className="form-control w-full md:w-1/2 md:mr-2">
                                 <label className="label">
                                     <span className="label-text">Product Image</span>
                                 </label>
@@ -160,7 +160,7 @@ const AddProduct = () => {
                                 })} className="file-input file-input-bordered w-full max-w-lg" />
                                 {errors.image && <p className='text-red-500'>{errors.image.message}</p>}
                             </div>
-                            <div className="form-control w-1/2 ml-2">
+                            <div className="form-control w-full md:w-1/2 md:ml-2">
                                 <label className="label">
                                     <span className="label-text">Category</span>
                                 </label>
@@ -175,7 +175,7 @@ const AddProduct = () => {
                             </div>
 
                         </div>
-                        <div className='flex justify-end items-center'>
+                        <div className='md:flex justify-end items-center'>
                             <p>Condition : </p>
                             <div className="form-control">
                                 <label className="label cursor-pointer">

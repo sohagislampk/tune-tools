@@ -63,7 +63,7 @@ const Bookings = () => {
                                 <th>{i + 1}</th>
 
                                 <td><div className="avatar">
-                                    <div className="w-16 rounded">
+                                    <div className="w-8 md:w-16 rounded">
                                         <img src={booking.image} alt="" />
                                     </div>
                                 </div></td>
