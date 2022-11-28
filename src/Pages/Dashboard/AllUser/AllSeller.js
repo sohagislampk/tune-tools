@@ -39,7 +39,7 @@ const AllSeller = () => {
         const email = {
             email: userEmail
         }
-        const url = `http://localhost:5000/users/${id}`
+        const url = `https://tune-tools-server.vercel.app/users/${id}`
         fetch(url, {
             method: 'PUT',
 

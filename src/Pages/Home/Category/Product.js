@@ -23,7 +23,7 @@ const Product = ({ product }) => {
     const date = `${postHour}:${postMin} Date : ${postDate}.${postMonth}.${postYear}`
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${sellerEmail.email}`, {
+        fetch(`https://tune-tools-server.vercel.app/users/${sellerEmail.email}`, {
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
             }
