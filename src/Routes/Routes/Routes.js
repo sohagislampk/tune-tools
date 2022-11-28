@@ -12,6 +12,7 @@ import Bookings from '../../Pages/Dashboard/Bookings/Bookings';
 import Dashboard from '../../Pages/Dashboard/Dashboard/Dashboard';
 import MyProduct from '../../Pages/Dashboard/ManageProduct/MyProduct';
 import Payment from '../../Pages/Dashboard/Payment/Payment';
+import MyWishlist from '../../Pages/Dashboard/Wishlist/MyWishlist';
 import Category from '../../Pages/Home/Category/Category';
 import ProductDetails from '../../Pages/Home/Category/ProductDetails';
 import Home from '../../Pages/Home/Home/Home';
@@ -88,6 +89,11 @@ const routes = createBrowserRouter([
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
                 loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`)
+            },
+            {
+                path: '/dashboard/wishlist',
+                element: <PrivateRoute><MyWishlist></MyWishlist></PrivateRoute>
+
             }
         ]
     },

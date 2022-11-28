@@ -40,7 +40,7 @@ const DashboardLayout = () => {
                                 <li><Link to="/dashboard/myproduct">My Product</Link></li>
                                 <li><Link to="/dashboard/addproduct">Add Product</Link></li>
                                 <li><Link to="/dashboard/bookings">My Orders</Link></li>
-
+                                <li><Link to="/dashboard/wishlist">My Wishlist</Link></li>
                             </>
                         }
                         {
@@ -48,6 +48,7 @@ const DashboardLayout = () => {
                             <>
 
                                 <li><Link to="/dashboard/bookings">My Orders</Link></li>
+                                <li><Link to="/dashboard/wishlist">My Wishlist</Link></li>
 
                             </>
                         }
@@ -56,6 +57,7 @@ const DashboardLayout = () => {
                             <>
                                 <li><Link to="/dashboard/bookings">My Orders</Link></li>
                                 <li><Link to="/dashboard/myproduct">My Product</Link></li>
+                                <li><Link to="/dashboard/wishlist">My Wishlist</Link></li>
                                 <li><Link to="/dashboard/addproduct">Add Product</Link></li>
                                 <li><Link to="/dashboard/allseller">All Seller</Link></li>
                                 <li><Link to="/dashboard/allbuyer">All Buyer</Link></li>

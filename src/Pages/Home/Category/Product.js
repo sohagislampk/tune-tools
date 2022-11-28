@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BsFillPersonFill } from 'react-icons/bs'
 import { ImLocation2 } from 'react-icons/im'
 import { Link } from 'react-router-dom';
@@ -7,10 +7,11 @@ import BookingModal from './BookingModal/BookingModal';
 import { MdVerifiedUser } from 'react-icons/md'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import toast from 'react-hot-toast';
-
+import axios from "axios";
 
 const Product = ({ product }) => {
     const { _id, image, name, description, time, year, price, condition, location, originalPrice, sellerName, status, wishlist } = product;
+    const [refresh, setRefresh] = useState(true)
     const { user } = useContext(Authcontext);
     const postYear = new Date(time).getFullYear();
     const postMonth = new Date(time).getMonth();
@@ -20,6 +21,8 @@ const Product = ({ product }) => {
     const currentYear = new Date().getFullYear();
     const yearOfUse = currentYear - year;
     const date = `${postHour}:${postMin} Date : ${postDate}.${postMonth}.${postYear}`
+
+
     const handleWishlist = (id, wishlist) => {
         const wishlistAdd = {
             wishlist: wishlist,
@@ -29,20 +32,21 @@ const Product = ({ product }) => {
             price: price,
             buyerName: user.displayName
         }
-        fetch(`http://localhost:5000/products/${id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json',
-                authorization: `bearer ${localStorage.getItem('accessToken')}`
-            },
-            body: JSON.stringify(wishlistAdd)
+        const headers = {
+            'content-type': 'application/json',
+            authorization: `bearer ${localStorage.getItem('accessToken')}`
         }
-        ).then(res => res.json())
+
+        axios.put(`http://localhost:5000/products/${id}`, wishlistAdd, { headers })
             .then(result => {
-                if (result.modifiedCount > 0 || result.acknowledged === true) {
+
+                if (result.data.modifiedCount > 0 || result.data.acknowledged === true) {
                     toast.success('Added whishlist Successfully')
+
+
                 }
             })
+
     }
     return (
         <>

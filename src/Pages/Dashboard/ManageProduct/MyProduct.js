@@ -77,6 +77,7 @@ const MyProduct = () => {
                             <th>Category</th>
                             <th>Delete</th>
                             <th>Status</th>
+                            <th>Advertise</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,6 +93,18 @@ const MyProduct = () => {
                                 <td>${product.price}</td>
                                 <td>{product.category}</td>
                                 <td><button onClick={() => handleDelete(product._id)} className='btn btn-xs btn-danger'>Delete</button></td>
+                                <td>{
+                                    product.status === 'sold' ?
+
+                                        <button className='btn btn-secondary disabled btn-xs' >Sold</button>
+
+                                        :
+
+                                        <button className='btn btn-secondary disabled btn-xs' >Available</button>
+
+                                }
+
+                                </td>
                                 <td>
                                     {
                                         product.status !== "advertise" && product.status !== 'sold' ?
