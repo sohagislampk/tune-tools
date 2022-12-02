@@ -89,7 +89,7 @@ const MyProduct = () => {
                                         <img src={product.image} alt="" />
                                     </div>
                                 </div></td>
-                                <td>{product.name}</td>
+                                <td className='w-16'>{product.name}</td>
                                 <td>${product.price}</td>
                                 <td>{product.category}</td>
                                 <td><button onClick={() => handleDelete(product._id)} className='btn btn-xs btn-danger'>Delete</button></td>
