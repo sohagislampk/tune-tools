@@ -18,6 +18,7 @@ const MyProduct = () => {
             return data;
         }
     });
+    // Handle Advertise 
     const handleAdvertise = (id, addStatus) => {
         const productStatus = {
             status: addStatus

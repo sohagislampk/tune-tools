@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
     }
-
+    //  Google Login
     const googleLogin = () => {
         setLoading(true)
         return signInWithPopup(auth, provider)
