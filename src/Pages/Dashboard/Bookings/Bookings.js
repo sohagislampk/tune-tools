@@ -19,6 +19,8 @@ const Bookings = () => {
             return data;
         }
     });
+
+    //  Delete 
     const handleDelete = (id) => {
         const url = `https://tune-tools-server.vercel.app/bookings/${id}`
         fetch(url, {

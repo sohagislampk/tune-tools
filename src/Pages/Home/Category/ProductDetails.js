@@ -8,7 +8,6 @@ const ProductDetails = () => {
     const { user } = useContext(Authcontext)
     const productDetails = useLoaderData();
 
-    const location = useLocation();
 
 
     const {

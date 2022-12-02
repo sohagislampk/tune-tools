@@ -21,7 +21,7 @@ const Product = ({ product }) => {
     const currentYear = new Date().getFullYear();
     const yearOfUse = currentYear - year;
     const date = `${postHour}:${postMin} Date : ${postDate}.${postMonth}.${postYear}`
-
+    // Filter Product by seller Email
     useEffect(() => {
         fetch(`https://tune-tools-server.vercel.app/users/${sellerEmail.email}`, {
             headers: {

@@ -17,6 +17,7 @@ const AllSeller = () => {
             return data;
         }
     });
+    // User Delete
     const handleDelete = (id) => {
         const url = `https://tune-tools-server.vercel.app/users/${id}`
         fetch(url, {
