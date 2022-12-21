@@ -41,7 +41,7 @@ const CheckoutFrom = ({ booking }) => {
             type: 'card',
             card
         });
-
+        // 
         if (error) {
             console.log(error);
             setCardError(error.message);
